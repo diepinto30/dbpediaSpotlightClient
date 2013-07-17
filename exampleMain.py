@@ -59,7 +59,7 @@ if __name__=='__main__':
     print '\n\n\n'
 
 ##  spotting service
-    print 'Spotting...\n'
+    print 'Spotting...\n '
     Input = 'http://news.in.gr/economy/article/?aid=1231240443'
     b=clt.spot(Input,'url')
     for i in b:
