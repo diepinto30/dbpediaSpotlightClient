@@ -43,7 +43,7 @@ if __name__=='__main__':
     print '\n\n\n'
 
 ## specify the types you are interested in as a 3rd argumnent in list
-    print 'with type restriction(Person)...\n'
+    print 'with type restriction(Place)...\n'
     a=clt.annotate(Input, 'text', ['Place'])
     for i in a:
         print i[0] + '\t' + i[1] + '\t' + i[2]
@@ -64,4 +64,25 @@ if __name__=='__main__':
     b=clt.spot(Input,'url')
     for i in b:
         print i[0],'\t',i[1]
+    print '\n\n\n'
+## getting the disambiguation candidates. Returns the candidates for each spotted surface form along with the following specs:
+## candidate's label, uri, contextual score, percentage of second rank, support, prior score, final score and types (see DBpedia Spotlight Wiki)
 
+    print 'Candidates...\n'
+    Input = 'Η Δράμα βρίσκεται στο γεωγραφικό διαμέρισμα της Μακεδονίας.'
+    c=clt.getCandidates(Input,'text')
+    for surfaceForm in c:
+        message = ''
+        candidates = c[surfaceForm]
+        print 'SurfaceForm "' + surfaceForm + '":\n'
+        for candidate in candidates:
+            message = '\tlabel:' + candidate['label'] + '\n' + \
+                      '\turi:' + candidate['uri'] + '\n' + \
+                      '\tcontextualScore:' + candidate['contextualScore'] + '\n' + \
+                      '\tpercentageOfSecondRank:' + candidate['percentageOfSecondRank'] + '\n' + \
+                      '\tsupport:' + candidate['support'] + '\n' + \
+                      '\tpriorScore:' + candidate['priorScore'] + '\n' + \
+                      '\tfinalScore:' + candidate['finalScore'] + '\n' + \
+                      '\ttypes:' + candidate['types'] + '\n'
+            print message 
+        
